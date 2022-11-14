@@ -4,16 +4,23 @@ package com.example.javafxtcpchat.server;
 import java.util.ArrayList;
 import java.util.List;
 
-//bygg om till databas med static som är en lista med alla users och rooms
 public class Database {
 
-    private static List<User> users = new ArrayList<>();
+    private static List<Room> rooms = new ArrayList<>();
 
-    public void addUser(User user) {
-        users.add(user);
+    public void addRoom(Room room) {
+        rooms.add(room);
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getAllUsers() {
+        List<User> allUsers = new ArrayList<>();
+        for (Room r : rooms) {
+            allUsers.addAll(r.getUsers());
+        }
+        return allUsers;
+    }
+
+    public List<Room> getAllRooms() {
+        return rooms;
     }
 }
