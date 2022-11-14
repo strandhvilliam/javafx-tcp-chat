@@ -12,9 +12,12 @@ public class UserHandler extends Thread {
 
     private Database database;
 
-    public UserHandler(Socket socket, Database database) {
+    private int port;
+
+    public UserHandler(Socket socket, Database database, int port) {
         this.socket = socket;
         this.database = database;
+        this.port = port;
     }
 
     @Override
@@ -27,15 +30,15 @@ public class UserHandler extends Thread {
             //skapa sen user med namnet och out
 
             User user = new User(out);
-            database.addUser(user);
-            System.out.println(database.getUsers().size());
+            Room room = database.getRoomByPort(port);
+            room.addUser(user);
 
             while (true) {
                 String input = in.readLine();
                 if (input == null) {
                     return;
                 }
-                for (User u : database.getUsers()) {
+                for (User u : room.getUsers()) {
                     u.printMessage(input);
                 }
             }

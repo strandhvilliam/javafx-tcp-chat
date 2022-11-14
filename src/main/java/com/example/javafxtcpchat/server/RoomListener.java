@@ -10,10 +10,15 @@ public class RoomListener {
 
     public RoomListener() {
 
-        try (ServerSocket serverSocket = new ServerSocket(55555)) {
+        int port = 55555; // temp port
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+
+            database.addRoom(new Room("Room 1", port));
+
             while (true) {
                 Socket socket = serverSocket.accept();
-                UserHandler userHandler = new UserHandler(socket, database);
+                UserHandler userHandler = new UserHandler(socket, database, port);
                 userHandler.start();
                 System.out.println("New user connected");
             }

@@ -23,4 +23,22 @@ public class Database {
     public List<Room> getAllRooms() {
         return rooms;
     }
+
+    public Room getRoomByName(String roomName) {
+        for (Room r : rooms) {
+            if (r.getRoomName().equals(roomName)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public Room getRoomByPort(int port) {
+        for (Room r : rooms) {
+            if (r.getPort() == port) {
+                return r;
+            }
+        }
+        return null;
+    }
 }

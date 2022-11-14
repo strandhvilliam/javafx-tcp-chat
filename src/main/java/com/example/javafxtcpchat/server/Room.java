@@ -6,11 +6,13 @@ import java.util.List;
 public class Room {
 
     private final String roomName;
+    private final int port;
 
     private List<User> users;
 
-    public Room(String roomName) {
+    public Room(String roomName, int port) {
         this.roomName = roomName;
+        this.port = port;
         this.users = new ArrayList<>();
     }
 
@@ -28,6 +30,10 @@ public class Room {
 
     public String getRoomName() {
         return roomName;
+    }
+
+    public int getPort() {
+        return port;
     }
 
 
