@@ -48,7 +48,7 @@
                               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button maxHeight="1.7976931348623157E308" minWidth="120.0" mnemonicParsing="false" prefWidth="131.0" styleClass="green-button" text="Send">
+                        <Button maxHeight="1.7976931348623157E308" minWidth="120.0" mnemonicParsing="false" onAction="#sendAction" prefWidth="131.0" styleClass="green-button" text="Send">
                            <HBox.margin>
                               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </HBox.margin>

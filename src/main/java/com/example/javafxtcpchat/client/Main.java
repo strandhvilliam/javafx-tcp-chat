@@ -19,12 +19,12 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chatroom.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Chat!");
 
-        ChatController controller = fxmlLoader.getController();
+        /*ChatController controller = fxmlLoader.getController();
         ToolBar t = controller.chatToolBar;
         Delta dragDelta = new Delta();
         t.setOnMousePressed(e -> {
@@ -34,7 +34,7 @@ public class Main extends Application {
         t.setOnMouseDragged(e -> {
             stage.setX(e.getScreenX() + dragDelta.x);
             stage.setY(e.getScreenY() + dragDelta.y);
-        });
+        });*/
 
         stage.setScene(scene);
         stage.show();

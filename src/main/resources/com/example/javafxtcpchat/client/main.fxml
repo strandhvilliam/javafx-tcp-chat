@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="main-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtcpchat.client.Controller">
    <center>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
@@ -27,95 +26,133 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
-               <GridPane.margin>
-                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-               </GridPane.margin>
+            <VBox alignment="CENTER" styleClass="blue-box">
                <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="723.0" prefWidth="535.0" VBox.vgrow="ALWAYS">
-                     <content>
-                        <Accordion>
-                           <panes>
-                              <TitledPane animated="false" expanded="false" prefHeight="645.0" prefWidth="526.0" text="RoomName">
-                                 <content>
-                                    <ListView prefHeight="0.0" />
-                                 </content>
-                              </TitledPane>
-                           </panes>
-                           <padding>
-                              <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-                           </padding>
-                        </Accordion>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" layoutX="646.0" layoutY="46.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label text="Create new chatroom">
+                  <Label styleClass="general-title" text="New User">
                      <VBox.margin>
                         <Insets bottom="36.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Room name" />
+                  <Label styleClass="small-label" text="Username" />
                   <TextField maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label text="Port" />
+                  <Label styleClass="small-label" text="Port / Room name" />
                   <TextField maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" text="Ok">
+                  <Button minWidth="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
                   </Button>
                </children>
-               <GridPane.margin>
-                  <Insets left="60.0" />
-               </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" layoutX="610.0" layoutY="436.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+            <VBox alignment="CENTER" styleClass="orange-box" GridPane.rowIndex="1">
                <children>
-                  <Label text="Create new user">
+                  <Label styleClass="general-title" text="New Chatroom">
                      <VBox.margin>
                         <Insets bottom="36.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Username" />
+                  <Label styleClass="small-label" text="Room name" />
                   <TextField maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label text="Port / Room name" />
+                  <Label styleClass="small-label" text="Port" />
                   <TextField maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" text="Ok">
+                  <Button minWidth="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
                   </Button>
                </children>
-               <GridPane.margin>
-                  <Insets left="60.0" />
-               </GridPane.margin>
             </VBox>
          </children>
       </GridPane>
    </center>
    <top>
-      <HBox prefHeight="133.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-         </children>
-      </HBox>
+      <ToolBar fx:id="chatToolBar" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+         <items>
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_close_12px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_full_screen_12px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="42.0" layoutY="13.0" mnemonicParsing="false" prefWidth="47.0">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_subtract_12px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </items>
+      </ToolBar>
    </top>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxHeight="660.0" prefWidth="475.0" styleClass="titled-pane-container">
+               <children>
+                  <Label alignment="CENTER" prefHeight="24.0" prefWidth="477.0" styleClass="medium-label" text="Open rooms">
+                     <VBox.margin>
+                        <Insets bottom="6.0" top="6.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TitledPane prefHeight="396.0" prefWidth="475.0" text="Room name port" VBox.vgrow="ALWAYS">
+                     <content>
+                        <ListView prefWidth="473.0" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="396.0" prefWidth="475.0" text="Room name port">
+                     <content>
+                        <ListView prefWidth="473.0" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane layoutX="11.0" layoutY="351.0" prefHeight="396.0" prefWidth="475.0" text="Room name port">
+                     <content>
+                        <ListView prefWidth="473.0" />
+                     </content>
+                  </TitledPane>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </VBox.margin>
+            </VBox>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@let's-chat.png" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>
