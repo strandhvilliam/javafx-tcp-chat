@@ -34,18 +34,18 @@
                      </VBox.margin>
                   </Label>
                   <Label styleClass="small-label" text="Username" />
-                  <TextField maxWidth="-Infinity" prefWidth="280.0">
+                  <TextField fx:id="usernameTextField" maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label styleClass="small-label" text="Port / Room name" />
-                  <TextField maxWidth="-Infinity" prefWidth="280.0">
+                  <Label styleClass="small-label" text="Port" />
+                  <TextField fx:id="joinRoomTextField" maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#createUserAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
+                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#joinRoomAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
@@ -60,13 +60,13 @@
                      </VBox.margin>
                   </Label>
                   <Label styleClass="small-label" text="Room name" />
-                  <TextField maxWidth="-Infinity" prefWidth="280.0">
+                  <TextField fx:id="chatRoomNameTextField" maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets bottom="12.0" />
                      </VBox.margin>
                   </TextField>
                   <Label styleClass="small-label" text="Port" />
-                  <TextField maxWidth="-Infinity" prefWidth="280.0">
+                  <TextField fx:id="chatRoomPortTextField" maxWidth="-Infinity" prefWidth="280.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

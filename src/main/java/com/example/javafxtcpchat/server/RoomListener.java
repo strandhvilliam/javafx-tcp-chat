@@ -3,32 +3,30 @@ package com.example.javafxtcpchat.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class RoomListener {
+public class RoomListener implements Runnable {
 
 
     private static Database database = new Database();
+    private int port;
 
-    public RoomListener() {
+    public RoomListener(int port) {
+        this.port = port;
+        //int port = 55555; temp port
+    }
 
-        int port = 55555; // temp port
-
+    @Override
+    public void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
-            database.addRoom(new Room("Room 1", port));
+            System.out.println("lets go");
 
             while (true) {
                 Socket socket = serverSocket.accept();
                 UserHandler userHandler = new UserHandler(socket, database, port);
                 userHandler.start();
-                System.out.println("New user connected");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-    }
-
-    public static void main(String[] args) {
-        new RoomListener();
     }
 }

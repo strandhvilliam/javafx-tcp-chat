@@ -36,7 +36,7 @@ public class ChatController implements Initializable {
 
     @FXML
     public void closeAction() {
-        Platform.exit();
+        chatToolBar.getScene().getWindow().hide();
     }
 
     @FXML
@@ -48,24 +48,29 @@ public class ChatController implements Initializable {
 
     private ChatClient chatClient;
 
+    private int port;
+    private String username;
+
 
     public void printMessage(String message) {
         chatTextArea.appendText(message + "\n");
     }
 
-
-
+    public void initData(int port, String username) {
+        this.port = port;
+        this.username = username;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        chatClient = new ChatClient(this);
+        chatClient = new ChatClient(this, port, username);
         Thread th = new Thread(chatClient);
         th.setDaemon(true);
         th.start();
 
-
     }
+
 
 }
 

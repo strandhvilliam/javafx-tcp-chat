@@ -29,7 +29,9 @@ public class UserHandler extends Thread {
             //sätt in.readLine() för att läsa av klientens inmatade namn från textfielden
             //skapa sen user med namnet och out
 
-            User user = new User(out);
+            String username = in.readLine();
+
+            User user = new User(username, out);
             Room room = database.getRoomByPort(port);
             room.addUser(user);
 
