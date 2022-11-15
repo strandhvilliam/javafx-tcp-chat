@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +27,9 @@ public class ChatController implements Initializable {
 
     @FXML
     private ListView<?> roomUsersList;
+
+    @FXML
+    private BorderPane testBorderPane;
 
     @FXML
     private Label usernameLabel;
