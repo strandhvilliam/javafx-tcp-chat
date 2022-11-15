@@ -3,18 +3,42 @@
 * {
     -fx-font-family: 'Archivo', sans-serif;
     -fx-font-weight: normal;
-    -fx-font-size: 12px;
     -fx-background-insets: 0;
     -fx-font-smoothing-type: gray;
+    -fx-padding: 0;
 }
 
 .main-background {
     -fx-background-color: #f4f4f0;
-    -fx-border-width: 0.0625em;
+    -fx-border-width: 0.1em;
     -fx-border-color: #000000;
 }
 
+.window-top-bar {
 
+}
+
+.tool-bar {
+    -fx-spacing: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 0.0625em 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+
+.tool-bar .button {
+    -fx-background-color: #f4f4f0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0.0625em 0 0;
+    -fx-border-color: #000000;
+    -fx-padding: 0.4em 1.4em;
+}
+
+.tool-bar .button:hover {
+    -fx-background-color: #cececd;
+}
 
 .text-field {
     -fx-border-color: #000000;
@@ -24,37 +48,52 @@
     -fx-background-radius: 0.25em;
     -fx-padding: 0.75em 1em;
     -fx-font-size: 1.1em;
+    -fx-text-fill: #000000;
 }
 
 .text-area {
-    }
+    -fx-text-fill: #000000;
 
+}
 
-
-.regular-button {
-    -fx-background-color: #f8f8f8;
+.common-label {
+    -fx-font-size: 1.2em;
+    -fx-background-color: #ffc900;
     -fx-border-color: #000000;
     -fx-background-radius: 2em;
     -fx-border-width: 0.1em;
     -fx-border-radius: 2em;
     -fx-text-fill: #000000;
-    -fx-animated: true;
+    -fx-padding: 0.4em 1em;
+}
+
+
+.regular-button {
+    -fx-background-color: #ff90e8;
+    -fx-border-color: #000000;
+    -fx-background-radius: 2em;
+    -fx-border-width: 0.1em;
+    -fx-border-radius: 2em;
+    -fx-text-fill: #000000;
     -fx-translate-x: 0;
     -fx-translate-y: 0;
+    -fx-font-size: 1.2em;
+    -fx-padding: 0.4em 1em;
 }
 
 .regular-button:hover {
     -fx-border-color: #000;
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: #ea97d5;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 0, 2, 2, 4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 1), 0, 2, 2, 4);
     -fx-translate-x: -0.2em;
     -fx-translate-y: -0.2em;
 }
 
 .green-button {
     -fx-background-color: #23a094;
-    -fx-border-color: #23a094;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.1em;
     -fx-background-radius: 2em;
     -fx-border-radius: 2em;
     -fx-text-fill: #ffffff;
@@ -72,7 +111,7 @@
     -fx-border-color: #000;
     -fx-border-width: 0.1em;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 0, 2, 2, 4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 1), 0, 2, 2, 4);
     -fx-translate-x: -0.2em;
     -fx-translate-y: -0.2em;
 }
@@ -92,31 +131,99 @@
 .south-container {
     -fx-border-color: #000000;
     -fx-border-width: 0.0625em 0 0 0;
-    -fx-background-color: #ffffff;
+    -fx-background-color: #ffc900;
+    -fx-padding: 0.4em 0;
 }
 
-.west-container .label {
-    -fx-text-fill: #000000;
+.list-header {
+    -fx-text-fill: #000;
+    -fx-border-width: 0 0 0.0625em 0;
+    -fx-border-color: #000000;
+    -fx-padding: 0.5em 0 0.5em 1em;
+}
+
+.list-header .text {
     -fx-font-size: 1.3em;
+    -fx-font-weight: bold;
+
 }
 
 .list-view {
     -fx-background-color: transparent;
     -fx-background-radius: 0.25em;
     -fx-border-color: #000000;
-    -fx-border-width: 0.0625em 0 0 0;
-    -fx-font-size: 1.1em;
+    -fx-border-width: 0 0 0 0;
+    -fx-font-size: 1.2em;
+    -fx-padding: 0;
 }
 
 .list-view .list-cell {
-    -fx-background-color: transparent;
-    -fx-background-radius: 0;
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 4;
+    -fx-border-insets: 4;
+    -fx-background-radius: 2em;
     -fx-border-color: #000;
-    -fx-border-width: 0;
-    -fx-padding: 0.75em 1em;
+    -fx-border-radius: 2em;
+    -fx-border-width: 0.1em;
+    -fx-padding: 0.6em 0.8em;
+    -fx-text-fill: #000;
+
 }
 
 .list-view .list-cell:hover {
     -fx-background-color: #e8e8e8;
     -fx-cursor: hand;
 }
+
+.list-view .list-cell:selected {
+    -fx-text-fill: #000;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-border-radius: 0.25em;
+    -fx-background-radius: 0.25em;
+    -fx-padding: 0.4em 0.4em 0 0;
+}
+
+.increment-arrow, .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.0625em;
+    -fx-border-radius: 0.25em;
+    -fx-background-radius: 0.25em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

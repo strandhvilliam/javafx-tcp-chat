@@ -4,14 +4,14 @@ package com.example.javafxtcpchat.client;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,10 +29,15 @@ public class ChatController implements Initializable {
     private ListView<?> roomUsersList;
 
     @FXML
-    private BorderPane testBorderPane;
+    protected ToolBar chatToolBar;
 
     @FXML
     private Label usernameLabel;
+
+    @FXML
+    public void closeAction() {
+        Platform.exit();
+    }
 
     @FXML
     void sendAction(ActionEvent event) {
@@ -49,6 +54,8 @@ public class ChatController implements Initializable {
     }
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -59,5 +66,6 @@ public class ChatController implements Initializable {
 
 
     }
+
 }
 
