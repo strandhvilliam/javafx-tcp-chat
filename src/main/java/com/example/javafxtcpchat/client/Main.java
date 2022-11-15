@@ -24,17 +24,10 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Chat!");
 
-        /*ChatController controller = fxmlLoader.getController();
-        ToolBar t = controller.chatToolBar;
-        Delta dragDelta = new Delta();
-        t.setOnMousePressed(e -> {
-            dragDelta.x = stage.getX() - e.getScreenX();
-            dragDelta.y = stage.getY() - e.getScreenY();
-        });
-        t.setOnMouseDragged(e -> {
-            stage.setX(e.getScreenX() + dragDelta.x);
-            stage.setY(e.getScreenY() + dragDelta.y);
-        });*/
+        Controller controller = fxmlLoader.getController();
+        ToolBar t = controller.mainToolBar;
+        Delta d = new Delta();
+        d.initMovableWindow(stage, scene, t);
 
         stage.setScene(scene);
         stage.show();
@@ -46,6 +39,5 @@ public class Main extends Application {
         launch();
     }
 
-    class Delta {double x, y;}
 
 }

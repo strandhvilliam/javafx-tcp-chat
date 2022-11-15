@@ -4,13 +4,14 @@
     -fx-font-family: 'Archivo', sans-serif;
     -fx-font-weight: normal;
     -fx-background-insets: 0;
+    -fx-border-insets: 0;
     -fx-font-smoothing-type: gray;
     -fx-padding: 0;
 }
 
 .main-background {
     -fx-background-color: #f4f4f0;
-    -fx-border-width: 0.2em;
+    -fx-border-width: 0.1em;
     -fx-border-color: #000000;
 }
 
@@ -22,7 +23,7 @@
     -fx-spacing: 0;
     -fx-background-color: transparent;
     -fx-border-color: #000000;
-    -fx-border-width: 0 0 0.2em 0;
+    -fx-border-width: 0 0 0.1em 0;
     -fx-padding: 0;
     -fx-background-insets: 0;
 }
@@ -74,8 +75,9 @@
 
 .medium-label {
     -fx-font-size: 1.4em;
-    -fx-background-color: transparent;
+    -fx-background-color: #f4f4f0;
     -fx-text-fill: #000000;
+    -fx-padding: 0.4em 0;
 }
 
 .small-label {
@@ -218,22 +220,20 @@
 
 .titled-pane {
     -fx-text-fill: #ffffff;
-
+    -fx-background-color: transparent;
 }
 
 .titled-pane-container {
     -fx-border-color: #000000;
     -fx-border-width: 0.2em;
-    -fx-background-color: #f4f4f0;
+    -fx-background-color: transparent;
     -fx-background-radius: 0.25em;
     -fx-border-radius: 0.25em;
 }
 
 .titled-pane > .content {
     -fx-background-color: #f4f4f0;
-    -fx-border-insets: 0;
     -fx-border-width: 0;
-    -fx-background-radius: 0.25em;
 }
 
 .titled-pane .title {
@@ -254,15 +254,21 @@
 .blue-box {
     -fx-background-color: #90a8ed;
     -fx-border-color: #000000;
-    -fx-border-width: 0 0 0.2em 0.2em;
+    -fx-border-width: 0 0 0.15em 0.15em;
 }
 
 .orange-box {
     -fx-background-color: #ffc900;
     -fx-border-color: #000000;
-    -fx-border-width: 0 0 0 0.2em;
+    -fx-border-width: 0 0 0 0.15em;
 }
 
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.25em;
+    -fx-border-width: 0;
+}
 
 
 

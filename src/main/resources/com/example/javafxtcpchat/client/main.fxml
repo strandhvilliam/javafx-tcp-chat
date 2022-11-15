@@ -45,7 +45,7 @@
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
+                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#createUserAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
@@ -71,7 +71,7 @@
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
+                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#createChatroomAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
@@ -82,9 +82,9 @@
       </GridPane>
    </center>
    <top>
-      <ToolBar fx:id="chatToolBar" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+      <ToolBar fx:id="mainToolBar" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
          <items>
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#closeAction">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -115,34 +115,34 @@
       </ToolBar>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background">
          <children>
-            <VBox maxHeight="660.0" prefWidth="475.0" styleClass="titled-pane-container">
+            <VBox prefHeight="651.0" prefWidth="250.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="24.0" prefWidth="477.0" styleClass="medium-label" text="Open rooms">
+                  <VBox fx:id="mainRoomsContainer" maxHeight="640.0" prefWidth="265.0" scaleShape="false" styleClass="titled-pane-container">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="38.0" styleClass="medium-label" text="Open rooms" VBox.vgrow="ALWAYS" />
+                        <TitledPane animated="false" expanded="false" text="Room name port" VBox.vgrow="ALWAYS">
+                           <content>
+                              <ListView />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" layoutX="10.0" layoutY="10.0" text="Room name port">
+                           <content>
+                              <ListView prefWidth="473.0" />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" layoutX="11.0" layoutY="351.0" text="Room name port">
+                           <content>
+                              <ListView />
+                           </content>
+                        </TitledPane>
+                     </children>
                      <VBox.margin>
-                        <Insets bottom="6.0" top="6.0" />
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </VBox.margin>
-                  </Label>
-                  <TitledPane prefHeight="396.0" prefWidth="475.0" text="Room name port" VBox.vgrow="ALWAYS">
-                     <content>
-                        <ListView prefWidth="473.0" />
-                     </content>
-                  </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="396.0" prefWidth="475.0" text="Room name port">
-                     <content>
-                        <ListView prefWidth="473.0" />
-                     </content>
-                  </TitledPane>
-                  <TitledPane layoutX="11.0" layoutY="351.0" prefHeight="396.0" prefWidth="475.0" text="Room name port">
-                     <content>
-                        <ListView prefWidth="473.0" />
-                     </content>
-                  </TitledPane>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-               </VBox.margin>
             </VBox>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
