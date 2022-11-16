@@ -11,7 +11,6 @@ public class RoomListener implements Runnable {
 
     public RoomListener(int port) {
         this.port = port;
-        //int port = 55555; temp port
     }
 
     @Override

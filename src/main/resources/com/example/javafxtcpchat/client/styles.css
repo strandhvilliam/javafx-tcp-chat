@@ -176,16 +176,16 @@
 }
 
 .list-view .list-cell {
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
     -fx-background-insets: 4;
     -fx-border-insets: 4;
     -fx-background-radius: 2em;
-    -fx-border-color: #000;
+    -fx-border-color: transparent;
     -fx-border-radius: 2em;
     -fx-border-width: 0.1em;
-    -fx-padding: 0.6em 0.8em;
+    -fx-padding: 0.5em 0.8em;
     -fx-text-fill: #000;
-
+    -fx-alignment: center;
 }
 
 .list-view .list-cell:hover {
@@ -229,6 +229,7 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0.25em;
     -fx-border-radius: 0.25em;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 1), 0, 2, 2, 4);
 }
 
 .titled-pane > .content {
@@ -268,6 +269,37 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0.25em;
     -fx-border-width: 0;
+}
+
+
+.circle-label {
+    -fx-background-color: #ea97d5;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.1em;
+    -fx-background-radius: 5em;
+    -fx-border-radius: 5em;
+    -fx-text-fill: #000;
+    -fx-font-weight: bold;
+    -fx-min-width: 1.8em;
+    -fx-min-height: 1.8em;
+    -fx-max-width: 1.8em;
+    -fx-max-height: 1.8em;
+}
+
+.circle-label .text {
+    -fx-text-fill: #000000;
+}
+
+.user-list-item {
+    -fx-padding: 0 0.5em 0 0.5em;
+    -fx-text-fill: #000000;
+}
+
+.user-list-label {
+    -fx-padding: 0 0.5em 0.15em 0.5em;
+    -fx-font-family: 'Archivo';
+    -fx-font-size: 1.3em;
+    -fx-background-color: transparent;
 }
 
 

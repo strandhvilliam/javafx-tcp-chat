@@ -3,19 +3,22 @@ package com.example.javafxtcpchat.client;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 
-public class ChatClient extends Task{
+public class ChatClient extends Task {
 
 
     private static final String USER_CONNECTED = "USER_CONNECTED";
+    private static final String USER_DISCONNECTED = "USER_DISCONNECTED";
+    private static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
+    private static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
+    private static final String MESSAGE = "MESSAGE";
 
     private final int port;
     private final String username;
-    private PrintWriter out;
+    private ObjectOutputStream out;
 
     private Socket socket;
 
@@ -31,25 +34,52 @@ public class ChatClient extends Task{
     protected Void call() throws Exception {
         System.out.println("Connecting to server...");
         socket = new Socket("127.0.0.1", port);
-        out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream((socket.getInputStream()));
 
-        sendMessage(username);
+        String[] connectRequest = {USER_CONNECTED, username};
+        out.writeObject(connectRequest);
 
-        String fromServer;
-        while ((fromServer = in.readLine()) != null) {
-            String finalFromServer = fromServer;
-            Platform.runLater(() -> controller.printMessage(finalFromServer));
+        String[] fromServer;
 
-            if (fromServer.startsWith(USER_CONNECTED)) {
+        while ((fromServer = (String[]) in.readObject()) != null) {
 
+            if (fromServer[0].equals(MESSAGE)) {
+                String message = fromServer[1];
+                Platform.runLater(() -> controller.printMessage(message));
+
+            } else if (fromServer[0].equals(USER_CONNECTED)) {
+                String user = fromServer[1];
+                Platform.runLater(() -> controller.printMessage(">>> " + user + " connected"));
+                requestUserList();
+
+            } else if (fromServer[0].equals(USER_DISCONNECTED)) {
+                String user = fromServer[1];
+                Platform.runLater(() -> controller.printMessage(">>> " + user + " disconnected"));
+                requestUserList();
+
+            } else if (fromServer[0].equals(GET_USERS_RESPONSE)) {
+                System.out.println(fromServer[1]);
+                String[] users = Arrays.copyOfRange(fromServer, 1, fromServer.length);
+                Platform.runLater(() -> controller.updateUserList(users));
             }
+
         }
         return null;
     }
 
-    public void sendMessage(String message) {
-        out.println(message);
+    private void requestUserList() {
+        String[] request = {GET_USERS_REQUEST};
+        try {
+            out.writeObject(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage(String message) throws IOException {
+        String[] toServer = {MESSAGE, username + ": " + message};
+        out.writeObject(toServer);
     }
 
 }

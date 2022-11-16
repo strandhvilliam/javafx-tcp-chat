@@ -1,19 +1,20 @@
 package com.example.javafxtcpchat.server;
 
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class User {
 
-    private String username;
-    private PrintWriter writer;
+    private final String username;
+    private final ObjectOutputStream output;
 
-    public User(String username, PrintWriter writer) {
-        this.writer = writer;
+    public User(String username, ObjectOutputStream output) {
+        this.username = username;
+        this.output = output;
     }
 
-    public void printMessage(String message) {
-        writer.println(message);
+    public void sendObject(String[] message) throws IOException {
+        output.writeObject(message);
     }
 
     public String getUsername() {

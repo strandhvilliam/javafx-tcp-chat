@@ -1,15 +1,18 @@
 package com.example.javafxtcpchat.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.List;
 
 public class UserHandler extends Thread {
 
 
     private static final String USER_CONNECTED = "USER_CONNECTED";
+    private static final String USER_DISCONNECTED = "USER_DISCONNECTED";
+    private static final String MESSAGE = "MESSAGE";
+
+    private static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
+    private static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
 
     private Socket socket;
 
@@ -26,33 +29,51 @@ public class UserHandler extends Thread {
     @Override
     public void run() {
 
-        try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            String username = in.readLine();
+
+            String[] connectionMessage = (String[]) in.readObject();
+            String username = connectionMessage[1];
 
             User user = new User(username, out);
             Room room = database.getRoomByPort(port);
             room.addUser(user);
 
-            String connectionMessage = USER_CONNECTED + ": " + username;
             for (User u : room.getUsers()) {
-                u.printMessage(connectionMessage);
+                u.sendObject(connectionMessage);
             }
 
-            while (true) {
-                String input = in.readLine();
-                if (input == null) {
-                    return;
-                }
-                for (User u : room.getUsers()) {
-                    u.printMessage(input);
-                }
-            }
+            String[] input;
+            while ((input = (String[]) in.readObject()) != null) {
+                if (input[0].equals(MESSAGE)) {
+                    for (User u : room.getUsers()) {
+                        u.sendObject(input);
+                    }
+                } else if (input[0].equals(USER_CONNECTED)) {
+                    for (User u : room.getUsers()) {
+                        u.sendObject(input);
+                    }
+                } else if (input[0].equals(USER_DISCONNECTED)) {
 
+                    for (User u : room.getUsers()) {
+                        u.sendObject(input);
+                    }
+                } else if (input[0].equals(GET_USERS_REQUEST)) {
+                    List<User> userList = room.getUsers();
+                    String[] users = new String[userList.size() + 1];
+                    for (int i = 0; i < userList.size(); i++) {
+                        users[i+1] = userList.get(i).getUsername();
+                        System.out.println(userList.get(i).getUsername());
+                    }
+                    users[0] = GET_USERS_RESPONSE;
+                    user.sendObject(users);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                }
+
+                }
+            } catch (IOException | ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
         }
 
     }
