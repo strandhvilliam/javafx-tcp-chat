@@ -11,16 +11,7 @@ import java.net.Socket;
 public class ChatClient extends Task{
 
 
-    public static final String INITIAL_REQUEST = "INITIAL_REQUEST";
-    public static final String CREATE_ROOM_REQUEST = "CREATE_ROOM_REQUEST";
-    public static final String JOIN_ROOM_REQUEST = "JOIN_ROOM_REQUEST";
-
-    public static final String INITIAL_RESPONSE = "INITIAL_RESPONSE";
-    public static final String CREATE_ROOM_RESPONSE = "CREATE_ROOM_RESPONSE";
-    public static final String JOIN_ROOM_RESPONSE = "JOIN_ROOM_RESPONSE";
-
-    public static final String SUCCESS_RESPONSE = "SUCCESS_RESPONSE";
-    public static final String ERROR_RESPONSE = "ERROR_RESPONSE";
+    private static final String USER_CONNECTED = "USER_CONNECTED";
 
     private final int port;
     private final String username;
@@ -44,12 +35,15 @@ public class ChatClient extends Task{
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         sendMessage(username);
-        System.out.println("Client: " + username);
-        String fromServer;
 
+        String fromServer;
         while ((fromServer = in.readLine()) != null) {
             String finalFromServer = fromServer;
             Platform.runLater(() -> controller.printMessage(finalFromServer));
+
+            if (fromServer.startsWith(USER_CONNECTED)) {
+
+            }
         }
         return null;
     }

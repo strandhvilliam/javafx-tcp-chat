@@ -26,7 +26,7 @@ public class ChatController implements Initializable {
     private TextField inputTextField;
 
     @FXML
-    private ListView<?> roomUsersList;
+    private ListView<String> roomUsersList;
 
     @FXML
     protected ToolBar chatToolBar;
@@ -36,6 +36,7 @@ public class ChatController implements Initializable {
 
     @FXML
     public void closeAction() {
+        //send request to disconnect user from room
         chatToolBar.getScene().getWindow().hide();
     }
 
@@ -48,17 +49,12 @@ public class ChatController implements Initializable {
 
     private ChatClient chatClient;
 
-    private int port;
-    private String username;
-
 
     public void printMessage(String message) {
         chatTextArea.appendText(message + "\n");
     }
 
     public void initData(int port, String username) {
-        this.port = port;
-        this.username = username;
         chatClient = new ChatClient(this, port, username);
         Thread th = new Thread(chatClient);
         th.setDaemon(true);
