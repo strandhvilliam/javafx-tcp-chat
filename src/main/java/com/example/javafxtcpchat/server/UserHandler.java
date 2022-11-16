@@ -25,13 +25,14 @@ public class UserHandler extends Thread {
 
         try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
+            System.out.println("UserHandler started");
             //sätt in.readLine() för att läsa av klientens inmatade namn från textfielden
             //skapa sen user med namnet och out
 
             String username = in.readLine();
 
             User user = new User(username, out);
+            System.out.println("User " + username + " connected to room " + port);
             Room room = database.getRoomByPort(port);
             room.addUser(user);
 

@@ -6,8 +6,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MainServer extends Thread {
-
-    // ska skapa upp huvudservern
     public MainServer() throws IOException {
 
 
@@ -16,7 +14,7 @@ public class MainServer extends Thread {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            String[] input = (String[]) in.readObject();
+            String[] input;
             Database database = new Database(); // skapar databasen (sparas inte i fil nuvarande)
             Protocol protocol = new Protocol(database);
 

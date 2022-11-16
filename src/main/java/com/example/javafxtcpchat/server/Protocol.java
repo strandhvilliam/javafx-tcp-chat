@@ -56,6 +56,7 @@ public class Protocol {
     private String[] joinRoom(String roomPort) {
         String[] res;
         try {
+
             int port = Integer.parseInt(roomPort);
             Room room = database.getRoomByPort(port);
 
@@ -107,19 +108,19 @@ public class Protocol {
     }
 
     private String[] initRoomListener(String name, int port) {
-        String[] res = new String[3];
-        if (database.getRoomByPort(port) == null
-                || database.getRoomByName(name) == null) {
+        String[] res;
+        if (database.getRoomByPort(port) != null
+                || database.getRoomByName(name) != null) {
             res = new String[]{CREATE_ROOM_RESPONSE, ERROR, ">>> Room already exists"};
-            return res;
+        } else {
+            Room room = new Room(name, port);
+            database.addRoom(room);
+            new Thread(new RoomListener(port)).start();
+            res = new String[]{CREATE_ROOM_RESPONSE, SUCCESS, String.valueOf(port), name};
+
         }
-        Room room = new Room(name, port);
-        database.addRoom(room);
-        new Thread(new RoomListener(port)).start();
-        res[0] = CREATE_ROOM_RESPONSE;
-        res[1] = SUCCESS;
-        res[2] = name;
         return res;
+
     }
 
 

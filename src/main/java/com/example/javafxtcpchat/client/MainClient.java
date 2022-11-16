@@ -20,8 +20,8 @@ public class MainClient extends Task {
     public static final String CREATE_ROOM_RESPONSE = "CREATE_ROOM_RESPONSE";
     public static final String JOIN_ROOM_RESPONSE = "JOIN_ROOM_RESPONSE";
 
-    public static final String SUCCESS_RESPONSE = "SUCCESS_RESPONSE";
-    public static final String ERROR_RESPONSE = "ERROR_RESPONSE";
+    public static final String SUCCESS = "SUCCESS";
+    public static final String ERROR = "ERROR";
 
     private Controller controller;
     private int port;
@@ -47,7 +47,7 @@ public class MainClient extends Task {
         return null;
     }
 
-    public void sendObject(Object object) throws IOException {
+    public void sendObject(String[] object) throws IOException {
         out.writeObject(object);
     }
 
@@ -73,16 +73,16 @@ public class MainClient extends Task {
 
     public void processResponse(String[] res) {
         if (res[0].equals(CREATE_ROOM_RESPONSE)) {
-            if (res[1].equals(SUCCESS_RESPONSE)) {
-                Platform.runLater(() -> controller.addRoomToGUI(res[2]));
+            if (res[1].equals(SUCCESS)) {
+                Platform.runLater(() -> controller.addRoomToGUI(res[2], res[3]));
             } else {
-                System.out.println("Error: " + (res[1]));
+                System.out.println("Error: " + (res[2]));
             }
         } else if (res[0].equals(JOIN_ROOM_RESPONSE)) {
-            if (res[1].equals(SUCCESS_RESPONSE)) {
-                Platform.runLater(() -> controller.openRoomGUI(Integer.parseInt(res[1]), res[2]));
+            if (res[1].equals(SUCCESS)) {
+                Platform.runLater(() -> controller.openRoomGUI(Integer.parseInt(res[2]), res[3]));
             } else {
-                System.out.println("Error: " + (res[1]));
+                System.out.println("Error: " + (res[2]));
             }
         }
     }

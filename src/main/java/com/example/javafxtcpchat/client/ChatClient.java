@@ -38,12 +38,13 @@ public class ChatClient extends Task{
 
     @Override
     protected Void call() throws Exception {
+        System.out.println("Connecting to server...");
         socket = new Socket("127.0.0.1", port);
         out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        out.println(username);
-
+        sendMessage(username);
+        System.out.println("Client: " + username);
         String fromServer;
 
         while ((fromServer = in.readLine()) != null) {

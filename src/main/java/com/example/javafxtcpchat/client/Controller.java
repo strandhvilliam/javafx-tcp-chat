@@ -57,7 +57,7 @@ public class Controller implements Initializable {
     @FXML
     public void joinRoomAction() {
         try {
-            mainClient.requestJoinRoom(usernameTextField.getText());
+            mainClient.requestJoinRoom(joinRoomTextField.getText());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,16 +65,20 @@ public class Controller implements Initializable {
     }
 
 
-    public void addRoomToGUI(String roomName) {
+    public void addRoomToGUI(String roomName, String strPort) {
         if (mainRoomsContainer.getChildren().size() != 11) {
             System.out.println("Adding room to GUI");
             TitledPane room = new TitledPane();
-            ListView users = new ListView();
-            room.setText(roomName);
+            ListView<String> users = new ListView<>();
+            room.setText(roomName + " - " + strPort);
             room.setAnimated(false);
             room.setContent(users);
             mainRoomsContainer.getChildren().add(room);
+        } else {
+            System.out.println("Max rooms reached");
         }
+        chatRoomNameTextField.clear();
+        chatRoomPortTextField.clear();
     }
 
 
@@ -97,6 +101,9 @@ public class Controller implements Initializable {
         String username = usernameTextField.getText();
         controller.initData(port, username);
 
+        usernameTextField.clear();
+        joinRoomTextField.clear();
+
         stage.setScene(scene);
         stage.show();
     }
@@ -104,7 +111,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainClient = new MainClient(this, 10000);
+        mainClient = new MainClient(this, 11111);
         Thread th = new Thread(mainClient);
         th.setDaemon(true);
         th.start();

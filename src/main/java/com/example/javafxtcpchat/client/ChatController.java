@@ -59,15 +59,15 @@ public class ChatController implements Initializable {
     public void initData(int port, String username) {
         this.port = port;
         this.username = username;
+        chatClient = new ChatClient(this, port, username);
+        Thread th = new Thread(chatClient);
+        th.setDaemon(true);
+        th.start();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        chatClient = new ChatClient(this, port, username);
-        Thread th = new Thread(chatClient);
-        th.setDaemon(true);
-        th.start();
 
     }
 

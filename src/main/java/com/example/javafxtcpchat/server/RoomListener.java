@@ -18,10 +18,10 @@ public class RoomListener implements Runnable {
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
-            System.out.println("lets go");
-
             while (true) {
+                System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
                 Socket socket = serverSocket.accept();
+                System.out.println("Just connected to " + socket.getRemoteSocketAddress());
                 UserHandler userHandler = new UserHandler(socket, database, port);
                 userHandler.start();
             }
