@@ -8,12 +8,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
-public class MainClient extends Task {
+public class MainClient extends Task<Void> {
 
     public static final String INITIAL_REQUEST = "INITIAL_REQUEST";
     public static final String CREATE_ROOM_REQUEST = "CREATE_ROOM_REQUEST";
     public static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
+    public static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
     public static final String JOIN_ROOM_REQUEST = "JOIN_ROOM_REQUEST";
 
     public static final String INITIAL_RESPONSE = "INITIAL_RESPONSE";
@@ -71,7 +73,7 @@ public class MainClient extends Task {
         sendObject(request);
     }
 
-    public void processResponse(String[] res) {
+    public synchronized void processResponse(String[] res) {
         if (res[0].equals(CREATE_ROOM_RESPONSE)) {
             if (res[1].equals(SUCCESS)) {
                 Platform.runLater(() -> controller.addRoomToGUI(res[2], res[3]));
@@ -80,10 +82,17 @@ public class MainClient extends Task {
             }
         } else if (res[0].equals(JOIN_ROOM_RESPONSE)) {
             if (res[1].equals(SUCCESS)) {
-                Platform.runLater(() -> controller.openRoomGUI(Integer.parseInt(res[2]), res[3]));
+                Platform.runLater(() -> controller.openRoomGUI(res[2], res[3]));
             } else {
                 System.out.println("Error: " + (res[2]));
             }
+        } else if (res[0].equals(GET_USERS_RESPONSE)) {
+            String roomPort = res[1];
+
+            String[] users = Arrays.copyOfRange(res, 2, res.length);
+
+            Platform.runLater(() -> controller.updateRoomUsers(roomPort, users));
+
         }
     }
 

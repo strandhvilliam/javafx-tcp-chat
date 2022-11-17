@@ -30,6 +30,7 @@ public class MainProtocol {
             res = joinRoom(req[1]);
         } else if (req[0].equals(GET_ROOMS_REQUEST)) {
             res = getRooms();
+
         } else if (req[0].equals(GET_USERS_REQUEST)) {
             res = getUsers(req[1]);
         } else {
@@ -64,12 +65,22 @@ public class MainProtocol {
             Room room = database.getRoomByPort(port);
             if (room != null) {
                 List<User> users = room.getUsers();
-                String[] res = new String[users.size() + 2];
-                res[0] = GET_USERS_RESPONSE;
-                res[1] = SUCCESS;
-                for (int i = 2; i < users.size(); i++) {
-                    res[i] = users.get(i).getUsername();
+
+                for (User user : users) {
+                    System.out.println(user.getUsername());
                 }
+
+                String[] res = new String[users.size() + 2];
+
+                res[0] = GET_USERS_RESPONSE;
+                System.out.println(">>>Users in room " + room.getRoomName() + ":");
+                res[1] = roomPort;
+                for (int i = 0; i < users.size(); i++) {
+                    res[i + 2] = users.get(i).getUsername();
+                }
+
+
+
                 return res;
             } else {
                 return new String[]{GET_USERS_RESPONSE, ERROR, ">>>Room not found"};
@@ -101,7 +112,7 @@ public class MainProtocol {
             Room room = new Room(name, port);
             database.addRoom(room);
             new Thread(new RoomListener(port)).start();
-            res = new String[]{CREATE_ROOM_RESPONSE, SUCCESS, String.valueOf(port), name};
+            res = new String[]{CREATE_ROOM_RESPONSE, SUCCESS, name, String.valueOf(port)};
 
         }
         return res;

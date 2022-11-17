@@ -299,10 +299,12 @@
 
 .big-circle-label {
     -fx-background-color: #23a094;
-    -fx-min-width: 4.6em;
-    -fx-min-height: 4.6em;
-    -fx-max-width: 4.6em;
-    -fx-max-height: 4.6em;
+    -fx-min-width: 2em;
+    -fx-min-height: 2em;
+    -fx-max-width: 2em;
+    -fx-max-height: 2em;
+    -fx-font-size: 2em;
+    -fx-padding: 0;
 }
 
 .user-list-item {
@@ -370,6 +372,17 @@
 
 .chat-list-view .list-cell:selected .label {
     -fx-text-fill: #000000;
+}
+
+
+
+.room-list-view {
+
+}
+
+.room-list-view .list-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #000000;
 }
 
 

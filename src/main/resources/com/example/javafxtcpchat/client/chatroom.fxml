@@ -97,7 +97,7 @@
                               <Insets right="24.0" />
                            </HBox.margin>
                         </Label>
-                        <Label maxHeight="68.0" maxWidth="67.0" prefHeight="68.0" prefWidth="67.0">
+                        <Label fx:id="bigIconLabel" maxHeight="68.0" maxWidth="67.0" prefHeight="68.0" prefWidth="67.0">
                            <styleClass>
                               <String fx:value="circle-label" />
                               <String fx:value="big-circle-label" />

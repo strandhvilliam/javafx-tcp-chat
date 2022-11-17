@@ -2,6 +2,7 @@ package com.example.javafxtcpchat.client;
 
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +41,9 @@ public class ChatController implements Initializable {
 
     @FXML
     protected HBox chatTopContainer;
+
+    @FXML
+    private Label bigIconLabel;
 
     @FXML
     private Label usernameLabel;
@@ -159,14 +163,16 @@ public class ChatController implements Initializable {
 
     }
 
-    public void initData(int port, String username, String roomName) {
-        chatClient = new ChatClient(this, port, username);
+    public void initData(String portStr, String username, String roomName, Controller mainController) {
+        int portNumber = Integer.parseInt(portStr);
+        chatClient = new ChatClient(this, portNumber, username);
         Thread th = new Thread(chatClient);
         th.setDaemon(true);
         th.start();
 
         usernameLabel.setText(username);
         roomNameLabel.setText(roomName);
+        bigIconLabel.setText(username.substring(0, 1).toUpperCase());
     }
 
     @Override

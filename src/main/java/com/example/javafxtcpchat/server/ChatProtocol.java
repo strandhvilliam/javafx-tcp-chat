@@ -38,7 +38,6 @@ public class ChatProtocol {
             response = new String[userList.size() + 1];
             for (int i = 0; i < userList.size(); i++) {
                 response[i+1] = userList.get(i).getUsername();
-                System.out.println(userList.get(i).getUsername());
             }
             response[0] = GET_USERS_RESPONSE;
         } else {

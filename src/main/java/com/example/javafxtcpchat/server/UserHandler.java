@@ -2,7 +2,6 @@ package com.example.javafxtcpchat.server;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.List;
 
 public class UserHandler extends Thread {
 
@@ -61,9 +60,9 @@ public class UserHandler extends Thread {
 
             }
 
-
+            socket.close();
         } catch (IOException | ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
+            ex.printStackTrace();
         }
 
     }

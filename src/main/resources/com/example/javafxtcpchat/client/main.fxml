@@ -53,7 +53,7 @@
             </VBox>
             <VBox alignment="CENTER" styleClass="orange-box" GridPane.rowIndex="1">
                <children>
-                  <Label styleClass="general-title" text="New Chatroom">
+                  <Label styleClass="general-title" text="New Chat Room">
                      <VBox.margin>
                         <Insets bottom="36.0" />
                      </VBox.margin>
@@ -81,7 +81,7 @@
       </GridPane>
    </center>
    <left>
-      <VBox alignment="TOP_CENTER" maxWidth="500.0" minWidth="300.0" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background">
+      <VBox alignment="TOP_CENTER" maxWidth="500.0" minWidth="300.0" prefHeight="771.0" prefWidth="391.0" styleClass="pink-background">
          <children>
             <VBox prefHeight="651.0">
                <children>

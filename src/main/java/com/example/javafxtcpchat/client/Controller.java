@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,11 +17,10 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-
-
 
 
     @FXML
@@ -69,23 +71,42 @@ public class Controller implements Initializable {
     @FXML
     public void joinRoomAction() {
         try {
-            mainClient.requestJoinRoom(joinRoomTextField.getText());
+            String strPort = joinRoomTextField.getText();
+            mainClient.requestJoinRoom(strPort);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    private HashMap<String, TitledPane> openRoomsMap = new HashMap<>();
+
 
     public void addRoomToGUI(String roomName, String strPort) {
         if (mainRoomsContainer.getChildren().size() != 11) {
             System.out.println("Adding room to GUI");
             TitledPane room = new TitledPane();
-            ListView<String> users = new ListView<>();
-            room.setText(roomName + " - " + strPort);
+            BorderPane borderPane = new BorderPane();
+            Label roomNameLabel = new Label(roomName);
+            Label roomPortLabel = new Label(strPort);
+            roomNameLabel.setStyle("-fx-text-fill: #000000");
+            roomPortLabel.setStyle("-fx-text-fill: #000000");
+            borderPane.setLeft(roomNameLabel);
+            borderPane.setRight(roomPortLabel);
+            borderPane.prefWidthProperty().bind(room.widthProperty().subtract(40));
+            room.setGraphic(borderPane);
             room.setAnimated(false);
-            room.setContent(users);
+
+            openRoomsMap.put(strPort, room);
+
             mainRoomsContainer.getChildren().add(room);
+
+            try {
+                mainClient.requestUsersInRoom(strPort);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         } else {
             System.out.println("Max rooms reached");
         }
@@ -93,8 +114,47 @@ public class Controller implements Initializable {
         chatRoomPortTextField.clear();
     }
 
+    public void updateRoomUsers(String strPort, String[] users) {
 
-    public void openRoomGUI(int port, String roomName){
+        //openRoomsMap.get(strPort).setContent(null);
+        //openRoomsMap.get(strPort).setContent(roomUsersList);
+
+
+        for (int i = 0; i < mainRoomsContainer.getChildren().size(); i++) {
+            if (mainRoomsContainer.getChildren().get(i).equals(openRoomsMap.get(strPort))) {
+                ListView<String> roomUsersList = new ListView<>();
+                roomUsersList.getItems().addAll(users);
+                roomUsersList.getStyleClass().add("room-list-view");
+
+                openRoomsMap.get(strPort).setContent(roomUsersList);
+                //mainRoomsContainer.getChildren().add(i, openRoomsMap.get(strPort));
+
+                roomUsersList.setCellFactory(param -> new ListCell<String>() {
+                    private ImageView imageView = new ImageView();
+
+                    @Override
+                    protected void updateItem(String name, boolean empty) {
+                        super.updateItem(name, empty);
+
+                        if (empty) {
+                            setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setStyle("-fx-background-color: #90a8ed; -fx-border-color: #000000");
+                            setText(name);
+                            setGraphic(imageView);
+                        }
+                    }
+                });
+            }
+
+        }
+
+    }
+
+
+    public void openRoomGUI(String strPort, String roomName) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chatroom.fxml"));
         Stage stage = new Stage(StageStyle.UNDECORATED);
         Scene scene;
@@ -111,10 +171,18 @@ public class Controller implements Initializable {
         d.initMovableWindow(stage, scene, topContainer);
 
         String username = usernameTextField.getText();
-        controller.initData(port, username, roomName);
+        controller.initData(strPort, username, roomName, this);
 
         usernameTextField.clear();
         joinRoomTextField.clear();
+
+        Platform.runLater(() -> {
+            try {
+                mainClient.requestUsersInRoom(strPort);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         stage.setScene(scene);
         stage.show();

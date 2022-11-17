@@ -4,6 +4,7 @@ package com.example.javafxtcpchat.server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class MainServer extends Thread {
     public MainServer() throws IOException {
@@ -20,12 +21,14 @@ public class MainServer extends Thread {
 
             while ((input = (String[]) in.readObject()) != null) {
                 String[] res = mainProtocol.processRequest(input);
+                System.out.println(res[0]);
+                out.reset();
                 out.writeObject(res);
             }
 
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SocketException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

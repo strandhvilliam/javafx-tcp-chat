@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class ChatClient extends Task {
+public class ChatClient extends Task<Void> {
 
 
     private static final String USER_CONNECTED = "USER_CONNECTED";
@@ -53,6 +53,7 @@ public class ChatClient extends Task {
                 String connectedUser = fromServer[1];
                 Platform.runLater(() -> controller.printInformation("User " + connectedUser + " connected"));
                 requestUserList();
+                System.out.println("INSIDE CHATCLIENT");
 
             } else if (fromServer[0].equals(USER_DISCONNECTED)) {
                 String disconnectedUser = fromServer[1];
@@ -60,7 +61,6 @@ public class ChatClient extends Task {
                 requestUserList();
 
             } else if (fromServer[0].equals(GET_USERS_RESPONSE)) {
-                System.out.println(fromServer[1]);
                 String[] users = Arrays.copyOfRange(fromServer, 1, fromServer.length);
                 Platform.runLater(() -> controller.updateUserList(users));
             } else {
