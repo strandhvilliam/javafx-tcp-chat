@@ -3,21 +3,6 @@ package com.example.javafxtcpchat.server;
 import java.util.List;
 
 public class Protocol {
-
-    // Protocol REQUESTS
-    // ----------------
-    // INITIAL_REQUEST
-    // CREATE_ROOM_REQUEST
-    // JOIN_ROOM_REQUEST
-
-
-    // Protocol RESPONSES
-    // -----------------
-    // INITIAL_RESPONSE
-    // CREATE_ROOM_RESPONSE
-    // JOIN_ROOM_RESPONSE
-
-    public static final String INITIAL_REQUEST = "INITIAL_REQUEST";
     public static final String CREATE_ROOM_REQUEST = "CREATE_ROOM_REQUEST";
     public static final String GET_ROOMS_REQUEST = "GET_ROOMS_REQUEST";
     public static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";

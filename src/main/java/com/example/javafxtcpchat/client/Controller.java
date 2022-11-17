@@ -1,13 +1,13 @@
 package com.example.javafxtcpchat.client;
 
-import com.example.javafxtcpchat.server.RoomListener;
+
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -22,7 +22,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    protected ToolBar mainToolBar;
+    protected HBox mainTopContainer;
 
     @FXML
     private VBox mainRoomsContainer;
@@ -42,6 +42,18 @@ public class Controller implements Initializable {
     @FXML
     private void closeAction() {
         Platform.exit();
+    }
+
+    @FXML
+    public void maximizeAction() {
+        Stage stage = (Stage) mainTopContainer.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    @FXML
+    public void minimizeAction() {
+        Stage stage = (Stage) mainTopContainer.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 
@@ -94,9 +106,9 @@ public class Controller implements Initializable {
         stage.setTitle("Chatroom: " + roomName);
 
         ChatController controller = fxmlLoader.getController();
-        ToolBar t = controller.chatToolBar;
+        HBox topContainer = controller.chatTopContainer;
         Delta d = new Delta();
-        d.initMovableWindow(stage, scene, t);
+        d.initMovableWindow(stage, scene, topContainer);
 
         String username = usernameTextField.getText();
         controller.initData(port, username);
@@ -118,10 +130,3 @@ public class Controller implements Initializable {
     }
 }
 
-//metod för att uppdatera mains lista med användare i rummet
-
-//skapa upp ett rum
-    //skapa ny instans av RoomListener med inparametern roomName och port
-
-//för att ansluta till rum
-    //skapa en användare som kopplar upp sig som klient till servern

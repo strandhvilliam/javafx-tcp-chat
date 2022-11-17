@@ -63,6 +63,8 @@ public class ChatClient extends Task {
                 System.out.println(fromServer[1]);
                 String[] users = Arrays.copyOfRange(fromServer, 1, fromServer.length);
                 Platform.runLater(() -> controller.updateUserList(users));
+            } else {
+                System.out.println(fromServer[0] + " " + fromServer[1]);
             }
 
         }
@@ -70,9 +72,18 @@ public class ChatClient extends Task {
     }
 
     private void requestUserList() {
-        String[] request = {GET_USERS_REQUEST};
+        String[] req = {GET_USERS_REQUEST};
         try {
-            out.writeObject(request);
+            out.writeObject(req);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void requestDisconnectUser() {
+        String[] req = {USER_DISCONNECTED, username};
+        try {
+            out.writeObject(req);
         } catch (IOException e) {
             e.printStackTrace();
         }

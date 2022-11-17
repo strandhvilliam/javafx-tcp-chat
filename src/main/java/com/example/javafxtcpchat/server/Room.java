@@ -37,4 +37,12 @@ public class Room {
     }
 
 
+    public User getUserByName(String name) {
+        for (User u : users) {
+            if (u.getUsername().equals(name)) {
+                return u;
+            }
+        }
+        return null;
+    }
 }

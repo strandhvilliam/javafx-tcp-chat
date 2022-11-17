@@ -14,6 +14,8 @@ public class UserHandler extends Thread {
     private static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
     private static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
 
+    public static final String ERROR = "ERROR";
+
     private Socket socket;
 
     private Database database;
@@ -56,9 +58,18 @@ public class UserHandler extends Thread {
                     }
                 } else if (input[0].equals(USER_DISCONNECTED)) {
 
-                    for (User u : room.getUsers()) {
-                        u.sendObject(input);
+                    User disconnectedUser = room.getUserByName(input[1]);
+                    String[] disconnectMessage;
+                    if (disconnectedUser != null) {
+                        room.removeUser(disconnectedUser);
+                        disconnectMessage = new String[]{USER_DISCONNECTED, input[1]};
+                    } else {
+                        disconnectMessage = new String[]{ERROR, "User " + input[1] + " not found"};
                     }
+                    for (User u : room.getUsers()) {
+                        u.sendObject(disconnectMessage);
+                    }
+
                 } else if (input[0].equals(GET_USERS_REQUEST)) {
                     List<User> userList = room.getUsers();
                     String[] users = new String[userList.size() + 1];

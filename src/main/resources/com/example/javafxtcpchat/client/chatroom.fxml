@@ -82,7 +82,7 @@
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <Button fx:id="leaveRoomButton" mnemonicParsing="false" styleClass="regular-button" text="Leave Room" GridPane.columnIndex="3" />
+                  <Button fx:id="leaveRoomButton" mnemonicParsing="false" onAction="#closeAction" styleClass="regular-button" text="Leave Room" GridPane.columnIndex="3" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -92,36 +92,60 @@
       </BorderPane>
    </center>
    <top>
-      <ToolBar fx:id="chatToolBar" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
-        <items>
-          <Button mnemonicParsing="false" onAction="#closeAction">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
+      <HBox fx:id="chatTopContainer" styleClass="top-container" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/icons8_close_12px.png" />
+                        <Image url="@icons/logo-small.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
                   </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8_full_screen_12px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="42.0" layoutY="13.0" mnemonicParsing="false" prefWidth="47.0">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8_subtract_12px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-        </items>
-      </ToolBar>
+               </children>
+            </HBox>
+            <HBox HBox.hgrow="NEVER">
+               <children>
+                  <ToolBar fx:id="mainToolBar" nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <items>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#closeAction">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_close_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#maximizeAction">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_full_screen_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#minimizeAction" prefWidth="47.0">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_subtract_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </items>
+                  </ToolBar>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

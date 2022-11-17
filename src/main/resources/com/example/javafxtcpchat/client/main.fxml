@@ -10,12 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="main-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtcpchat.client.Controller">
    <center>
-      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -79,43 +80,10 @@
          </children>
       </GridPane>
    </center>
-   <top>
-      <ToolBar fx:id="mainToolBar" nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
-         <items>
-            <Button mnemonicParsing="false" onAction="#closeAction">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8_close_12px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8_full_screen_12px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="42.0" layoutY="13.0" mnemonicParsing="false" prefWidth="47.0">
-               <graphic>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8_subtract_12px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </items>
-      </ToolBar>
-   </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background">
+      <VBox alignment="TOP_CENTER" maxWidth="500.0" minWidth="300.0" prefHeight="771.0" prefWidth="500.0" styleClass="pink-background">
          <children>
-            <VBox prefHeight="651.0" prefWidth="250.0">
+            <VBox prefHeight="651.0">
                <children>
                   <VBox fx:id="mainRoomsContainer" maxHeight="640.0" prefWidth="265.0" scaleShape="false" styleClass="titled-pane-container">
                      <children>
@@ -138,4 +106,61 @@
          </children>
       </VBox>
    </left>
+   <top>
+      <HBox fx:id="mainTopContainer" styleClass="top-container" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/logo-small.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox HBox.hgrow="NEVER">
+               <children>
+                  <ToolBar fx:id="mainToolBar" nodeOrientation="RIGHT_TO_LEFT" HBox.hgrow="ALWAYS">
+                     <items>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#closeAction">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_close_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#maximizeAction">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_full_screen_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#minimizeAction" prefWidth="47.0">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_subtract_12px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </items>
+                  </ToolBar>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

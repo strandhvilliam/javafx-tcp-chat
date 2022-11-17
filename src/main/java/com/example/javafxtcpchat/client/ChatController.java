@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 
 
@@ -38,15 +39,27 @@ public class ChatController implements Initializable {
     private ListView<GridPane> chatListView;
 
     @FXML
-    protected ToolBar chatToolBar;
+    protected HBox chatTopContainer;
 
     @FXML
     private Label usernameLabel;
 
     @FXML
     public void closeAction() {
-        //send request to disconnect user from room
-        chatToolBar.getScene().getWindow().hide();
+        chatClient.requestDisconnectUser();
+        chatTopContainer.getScene().getWindow().hide();
+    }
+
+    @FXML
+    public void maximizeAction() {
+        Stage stage = (Stage) chatTopContainer.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    @FXML
+    public void minimizeAction() {
+        Stage stage = (Stage) chatTopContainer.getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @FXML
