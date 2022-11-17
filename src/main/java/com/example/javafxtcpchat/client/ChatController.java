@@ -1,25 +1,24 @@
 package com.example.javafxtcpchat.client;
 
 
-import javafx.application.Platform;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.util.converter.LocalDateStringConverter;
+
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,6 +33,9 @@ public class ChatController implements Initializable {
 
     @FXML
     private ListView<HBox> roomUsersList;
+
+    @FXML
+    private ListView<GridPane> chatListView;
 
     @FXML
     protected ToolBar chatToolBar;
@@ -112,8 +114,30 @@ public class ChatController implements Initializable {
     private ChatClient chatClient;
 
 
-    public void printMessage(String message) {
-        chatTextArea.appendText(message + "\n");
+    public void printInformation(String message) {
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        VBox vBox = new VBox();
+        vBox.setFillWidth(true);
+        Label label = new Label(message);
+        label.setStyle("-fx-text-fill: #313131");
+        vBox.getChildren().add(label);
+        label.setAlignment(Pos.CENTER);
+        gridPane.add(vBox, 0, 0);
+        chatListView.getItems().add(gridPane);
+        chatListView.scrollTo(chatListView.getItems().size() - 1);
+    }
+
+    public void printMessage(String username, String message) {
+
+        boolean isUser = username.equals(usernameLabel.getText());
+
+        GridPane messagePane = new MessageBubble(message,
+                username, isUser, chatListView.getWidth());
+
+        chatListView.getItems().add(messagePane);
+        chatListView.scrollTo(chatListView.getItems().size() - 1);
+
     }
 
     public void initData(int port, String username) {
@@ -121,6 +145,8 @@ public class ChatController implements Initializable {
         Thread th = new Thread(chatClient);
         th.setDaemon(true);
         th.start();
+
+        usernameLabel.setText(username);
     }
 
     @Override

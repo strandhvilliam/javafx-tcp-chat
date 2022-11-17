@@ -45,17 +45,18 @@ public class ChatClient extends Task {
         while ((fromServer = (String[]) in.readObject()) != null) {
 
             if (fromServer[0].equals(MESSAGE)) {
-                String message = fromServer[1];
-                Platform.runLater(() -> controller.printMessage(message));
+                String senderName = fromServer[1];
+                String message = fromServer[2];
+                Platform.runLater(() -> controller.printMessage(senderName, message));
 
             } else if (fromServer[0].equals(USER_CONNECTED)) {
-                String user = fromServer[1];
-                Platform.runLater(() -> controller.printMessage(">>> " + user + " connected"));
+                String connectedUser = fromServer[1];
+                Platform.runLater(() -> controller.printInformation("User " + connectedUser + " connected"));
                 requestUserList();
 
             } else if (fromServer[0].equals(USER_DISCONNECTED)) {
-                String user = fromServer[1];
-                Platform.runLater(() -> controller.printMessage(">>> " + user + " disconnected"));
+                String disconnectedUser = fromServer[1];
+                Platform.runLater(() -> controller.printInformation("User " + disconnectedUser + " disconnected"));
                 requestUserList();
 
             } else if (fromServer[0].equals(GET_USERS_RESPONSE)) {
@@ -78,7 +79,7 @@ public class ChatClient extends Task {
     }
 
     public void sendMessage(String message) throws IOException {
-        String[] toServer = {MESSAGE, username + ": " + message};
+        String[] toServer = {MESSAGE, username, message};
         out.writeObject(toServer);
     }
 

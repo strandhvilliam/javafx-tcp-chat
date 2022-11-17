@@ -143,7 +143,7 @@
 .west-container {
     -fx-border-color: #000000;
     -fx-border-width: 0 0.1em 0 0;
-    -fx-background-color: #90a8ed;
+    -fx-background-color: #23a094;
 }
 
 .south-container {
@@ -284,6 +284,8 @@
     -fx-min-height: 1.8em;
     -fx-max-width: 1.8em;
     -fx-max-height: 1.8em;
+    -fx-alignment: center;
+
 }
 
 .circle-label .text {
@@ -302,7 +304,60 @@
     -fx-background-color: transparent;
 }
 
+.left-chat-bubble {
+    -fx-background-color: #f4f4f0;
+    -fx-background-radius: 0.5em 0.5em 0.5em 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.1em;
+    -fx-border-radius: 0.5em 0.5em 0.5em 0;
+    -fx-padding: 0.5em 0.8em;
+    -fx-text-fill: #000000;
+    -fx-spacing: 0.25em;
 
+}
+
+.right-chat-bubble {
+    -fx-background-color: #f4f4f0;
+    -fx-background-radius: 0.5em 0.5em 0 0.5em;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.1em;
+    -fx-border-radius: 0.5em 0.5em 0 0.5em;
+    -fx-padding: 0.5em 0.8em;
+    -fx-text-fill: #000000;
+    -fx-spacing: 0.25em;
+}
+
+.bubble-message-label {
+    -fx-wrap-text: true;
+    -fx-font-weight: bold;
+}
+
+.bubble-time-label {
+    -fx-font-size: 0.8em;
+}
+
+.bubble-name-label {
+    -fx-font-size: 0.9em;
+    -fx-padding: 0 0.5em 0 0.5em;
+}
+
+.chat-list-view {
+    -fx-background-color: #90a8ed;
+    -fx-background-radius: 0;
+}
+
+.chat-list-view .list-cell:hover {
+    -fx-background-color: transparent;
+    -fx-cursor: pointer;
+}
+
+.chat-list-view .list-cell .label{
+    -fx-text-fill: #000000;
+}
+
+.chat-list-view .list-cell:selected .label{
+    -fx-text-fill: #000000;
+}
 
 
 

@@ -37,7 +37,7 @@ public class Protocol {
         this.database = database;
     }
 
-    public String[] processRequest(String[] req) {
+    public synchronized String[] processRequest(String[] req) {
         String[] res;
         if (req[0].equals(CREATE_ROOM_REQUEST)) {
             res = initRoomListener(req[1], Integer.parseInt(req[2]));
@@ -53,7 +53,7 @@ public class Protocol {
         return res;
     }
 
-    private String[] joinRoom(String roomPort) {
+    private synchronized String[] joinRoom(String roomPort) {
         String[] res;
         try {
 
@@ -73,7 +73,7 @@ public class Protocol {
 
     }
 
-    private String[] getUsers(String roomPort) {
+    private synchronized String[] getUsers(String roomPort) {
         try {
             int port = Integer.parseInt(roomPort);
             Room room = database.getRoomByPort(port);
@@ -95,7 +95,7 @@ public class Protocol {
     }
 
 
-    private String[] getRooms() {
+    private synchronized String[] getRooms() {
         List<Room> rooms = database.getAllRooms();
         String[] res = new String[rooms.size() + 2];
         res[0] = GET_ROOMS_RESPONSE;
@@ -107,7 +107,7 @@ public class Protocol {
         return res;
     }
 
-    private String[] initRoomListener(String name, int port) {
+    private synchronized String[] initRoomListener(String name, int port) {
         String[] res;
         if (database.getRoomByPort(port) != null
                 || database.getRoomByName(name) != null) {
