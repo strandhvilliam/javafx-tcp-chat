@@ -45,6 +45,9 @@ public class ChatController implements Initializable {
     private Label usernameLabel;
 
     @FXML
+    private Label roomNameLabel;
+
+    @FXML
     public void closeAction() {
         chatClient.requestDisconnectUser();
         chatTopContainer.getScene().getWindow().hide();
@@ -63,13 +66,15 @@ public class ChatController implements Initializable {
     }
 
     @FXML
-    void sendAction(ActionEvent event) {
+    void sendAction() {
         String message = inputTextField.getText();
-        inputTextField.clear();
-        try {
-            chatClient.sendMessage(message);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (message.length() > 0) {
+            try {
+                chatClient.sendMessage(message);
+                inputTextField.clear();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -95,6 +100,7 @@ public class ChatController implements Initializable {
             Label label = new Label(user);
             label.setAlignment(Pos.CENTER_LEFT);
             label.getStyleClass().add("user-list-label");
+            label.setStyle("-fx-text-fill: #000000");
             hBox.getChildren().add(label);
             hBoxList.add(hBox);
         }
@@ -153,13 +159,14 @@ public class ChatController implements Initializable {
 
     }
 
-    public void initData(int port, String username) {
+    public void initData(int port, String username, String roomName) {
         chatClient = new ChatClient(this, port, username);
         Thread th = new Thread(chatClient);
         th.setDaemon(true);
         th.start();
 
         usernameLabel.setText(username);
+        roomNameLabel.setText(roomName);
     }
 
     @Override

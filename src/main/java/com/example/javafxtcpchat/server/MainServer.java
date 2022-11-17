@@ -16,10 +16,10 @@ public class MainServer extends Thread {
 
             String[] input;
             Database database = new Database(); // skapar databasen (sparas inte i fil nuvarande)
-            Protocol protocol = new Protocol(database);
+            MainProtocol mainProtocol = new MainProtocol(database);
 
             while ((input = (String[]) in.readObject()) != null) {
-                String[] res = protocol.processRequest(input);
+                String[] res = mainProtocol.processRequest(input);
                 out.writeObject(res);
             }
 

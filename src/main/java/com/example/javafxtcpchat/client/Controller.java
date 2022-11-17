@@ -111,7 +111,7 @@ public class Controller implements Initializable {
         d.initMovableWindow(stage, scene, topContainer);
 
         String username = usernameTextField.getText();
-        controller.initData(port, username);
+        controller.initData(port, username, roomName);
 
         usernameTextField.clear();
         joinRoomTextField.clear();

@@ -2,7 +2,7 @@ package com.example.javafxtcpchat.server;
 
 import java.util.List;
 
-public class Protocol {
+public class MainProtocol {
     public static final String CREATE_ROOM_REQUEST = "CREATE_ROOM_REQUEST";
     public static final String GET_ROOMS_REQUEST = "GET_ROOMS_REQUEST";
     public static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
@@ -18,7 +18,7 @@ public class Protocol {
 
     public static Database database;
 
-    public Protocol(Database database) {
+    public MainProtocol(Database database) {
         this.database = database;
     }
 

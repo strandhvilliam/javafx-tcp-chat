@@ -48,42 +48,21 @@ public class UserHandler extends Thread {
 
             String[] input;
             while ((input = (String[]) in.readObject()) != null) {
-                if (input[0].equals(MESSAGE)) {
-                    for (User u : room.getUsers()) {
-                        u.sendObject(input);
-                    }
-                } else if (input[0].equals(USER_CONNECTED)) {
-                    for (User u : room.getUsers()) {
-                        u.sendObject(input);
-                    }
-                } else if (input[0].equals(USER_DISCONNECTED)) {
 
-                    User disconnectedUser = room.getUserByName(input[1]);
-                    String[] disconnectMessage;
-                    if (disconnectedUser != null) {
-                        room.removeUser(disconnectedUser);
-                        disconnectMessage = new String[]{USER_DISCONNECTED, input[1]};
-                    } else {
-                        disconnectMessage = new String[]{ERROR, "User " + input[1] + " not found"};
-                    }
+                ChatProtocol chatProtocol = new ChatProtocol();
+                String[] response = chatProtocol.processRequest(input, room);
+                if (response[0].equals(ERROR) || response[0].equals(GET_USERS_RESPONSE)) {
+                    user.sendObject(response);
+                } else {
                     for (User u : room.getUsers()) {
-                        u.sendObject(disconnectMessage);
+                        u.sendObject(response);
                     }
-
-                } else if (input[0].equals(GET_USERS_REQUEST)) {
-                    List<User> userList = room.getUsers();
-                    String[] users = new String[userList.size() + 1];
-                    for (int i = 0; i < userList.size(); i++) {
-                        users[i+1] = userList.get(i).getUsername();
-                        System.out.println(userList.get(i).getUsername());
-                    }
-                    users[0] = GET_USERS_RESPONSE;
-                    user.sendObject(users);
-
                 }
 
-                }
-            } catch (IOException | ClassNotFoundException ex) {
+            }
+
+
+        } catch (IOException | ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         }
 

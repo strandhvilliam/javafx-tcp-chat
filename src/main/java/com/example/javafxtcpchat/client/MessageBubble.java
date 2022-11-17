@@ -8,6 +8,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class MessageBubble extends GridPane {
 
@@ -23,10 +24,12 @@ public class MessageBubble extends GridPane {
         messageLabel.getStyleClass().add("bubble-message-label");
         messageLabel.setMaxWidth(listWidth / 2);
 
-        Label time = new Label(LocalTime.now().toString());
-        time.getStyleClass().add("bubble-time-label");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String time = LocalTime.now().format(formatter);
+        Label timeLabel = new Label(time);
+        timeLabel.getStyleClass().add("bubble-time-label");
         bubble.getChildren().add(messageLabel);
-        bubble.getChildren().add(time);
+        bubble.getChildren().add(timeLabel);
 
         Label iconLabel = new Label(username.substring(0, 1).toUpperCase());
         iconLabel.getStyleClass().add("circle-label");
