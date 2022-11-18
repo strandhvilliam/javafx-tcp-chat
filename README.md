@@ -28,6 +28,7 @@ This is the result of a school project to create a chat application using client
 - List to the left is the active users in room.
 
 <img src="https://user-images.githubusercontent.com/87245022/202737557-81417aff-b2eb-4b58-85e7-f2b063348ee0.png" width="440" align="left"/>
+
 <img src="https://user-images.githubusercontent.com/87245022/202735801-2d3eae79-6a05-4524-a1d9-99243745221e.png" width="440" />
 
 ## TODO
