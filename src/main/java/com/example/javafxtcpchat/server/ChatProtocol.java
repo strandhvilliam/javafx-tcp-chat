@@ -8,7 +8,6 @@ public class ChatProtocol {
     private static final String USER_CONNECTED = "USER_CONNECTED";
     private static final String USER_DISCONNECTED = "USER_DISCONNECTED";
     private static final String MESSAGE = "MESSAGE";
-
     private static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
     private static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
 

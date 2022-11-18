@@ -44,7 +44,7 @@
                         <Insets />
                      </VBox.margin>
                   </TextField>
-                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#joinRoomAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Create">
+                  <Button minWidth="80.0" mnemonicParsing="false" onAction="#joinRoomAction" prefHeight="40.0" prefWidth="110.0" styleClass="green-button" text="Join">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>

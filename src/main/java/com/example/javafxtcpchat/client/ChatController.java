@@ -52,9 +52,14 @@ public class ChatController implements Initializable {
     private Label roomNameLabel;
 
     @FXML
+    private int portNumber;
+    private Controller mainController;
+
+    @FXML
     public void closeAction() {
         chatClient.requestDisconnectUser();
         chatTopContainer.getScene().getWindow().hide();
+        mainController.requestRoomUsers(String.valueOf(portNumber));
     }
 
     @FXML
@@ -164,7 +169,8 @@ public class ChatController implements Initializable {
     }
 
     public void initData(String portStr, String username, String roomName, Controller mainController) {
-        int portNumber = Integer.parseInt(portStr);
+        this.mainController = mainController;
+        portNumber = Integer.parseInt(portStr);
         chatClient = new ChatClient(this, portNumber, username);
         Thread th = new Thread(chatClient);
         th.setDaemon(true);

@@ -101,11 +101,7 @@ public class Controller implements Initializable {
 
             mainRoomsContainer.getChildren().add(room);
 
-            try {
-                mainClient.requestUsersInRoom(strPort);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            requestRoomUsers(strPort);
 
         } else {
             System.out.println("Max rooms reached");
@@ -186,6 +182,14 @@ public class Controller implements Initializable {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void requestRoomUsers(String strPort) {
+        try {
+            mainClient.requestUsersInRoom(strPort);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

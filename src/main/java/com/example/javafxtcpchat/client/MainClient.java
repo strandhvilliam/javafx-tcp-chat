@@ -6,7 +6,6 @@ import javafx.concurrent.Task;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 
@@ -17,8 +16,6 @@ public class MainClient extends Task<Void> {
     public static final String GET_USERS_REQUEST = "GET_USERS_REQUEST";
     public static final String GET_USERS_RESPONSE = "GET_USERS_RESPONSE";
     public static final String JOIN_ROOM_REQUEST = "JOIN_ROOM_REQUEST";
-
-    public static final String INITIAL_RESPONSE = "INITIAL_RESPONSE";
     public static final String CREATE_ROOM_RESPONSE = "CREATE_ROOM_RESPONSE";
     public static final String JOIN_ROOM_RESPONSE = "JOIN_ROOM_RESPONSE";
 
